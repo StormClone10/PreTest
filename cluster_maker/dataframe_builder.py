@@ -11,15 +11,21 @@ import pandas as pd
 import numpy as np
 
 ## Function to define the wanted data structure
-def define_dataframe_structure(column_specs):
+def define_dataframe_structure(column_specs): 
+    """
+    This function takes a list of dictionaries, each containing the specifications for a column in the dataframe.
+    The specifications should include the column name and the representative points for the column.
+    The function returns a pandas DataFrame with the specified structure.
+
+    """
     # Prepare data dictionary
     data = {}
     max_length = 0
 
     # Find the maximum length of representative points
     for spec in column_specs:
-        max_length = max(max_length, len(spec.get('reps', [])))
-
+        max_length = max(max_length, len(spec.get('reps', []))) #getting the value of key Reps in the specification or if reps doesnt exist as a key, returns empty list as default value
+        #^finding the maximum length of the reps in the column_specs
     for spec in column_specs:
         name = spec['name']
         reps = spec.get('reps', [])
@@ -31,6 +37,10 @@ def define_dataframe_structure(column_specs):
 
 ## Function to simulate data
 def simulate_data(seed_df, n_points=100, col_specs=None, random_state=None):
+    """
+    This is a doc string
+
+    """
     if random_state is not None:
         np.random.seed(random_state)
     
